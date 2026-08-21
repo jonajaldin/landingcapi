@@ -2,6 +2,9 @@ name: fetch-assets
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - '.genassets/fetch.json'
 
 permissions:
   contents: write
