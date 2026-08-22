@@ -1,6 +1,4 @@
 [
- {"out":"gen2/w1.png","url":"https://pikaso.cdnpk.net/private/production/5233134944/render.png?token=exp=1787702400~hmac=fa17e4878c6430e4b2114b3872bc19751a18ff05a75751116e5a0cc9bed056c2"},
- {"out":"gen2/w2.png","url":"https://pikaso.cdnpk.net/private/production/5233135216/render.png?token=exp=1787702400~hmac=1b8f81e31410a10928120e3e6a00168b8661d1c67cd7d265a532b65ef51c879e"},
- {"out":"gen2/w3.png","url":"https://pikaso.cdnpk.net/private/production/5233134950/render.png?token=exp=1787702400~hmac=309d44540ca2a0f37f459658d9c03b55a84e5bac77d3b164ac8e4b2efc6e1765"},
- {"out":"gen2/w4.png","url":"https://pikaso.cdnpk.net/private/production/5233134929/render.png?token=exp=1787702400~hmac=9473ccb53fabc18ecb5222d77956a7088dbf8091e1b20b7d07f1e7e6804712bf"}
+ {"out":"char-ampliado.png","url":"https://pikaso.cdnpk.net/private/production/5233162423/render.png?token=exp=1787702400~hmac=0cf65d0daf4cc825e463c7eb4417523eb3ed97daef52f4ca00634c4d1ab471c4"},
+ {"out":"char-ampliado-verde.png","url":"https://pikaso.cdnpk.net/private/production/5233161917/render.png?token=exp=1787702400~hmac=37175f26ed025ccd6154ba60bfd8f63db9db49a1ef96554401fac4e6836a83f2"}
 ]
