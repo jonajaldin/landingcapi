@@ -1,0 +1,33 @@
+IMÁGENES DE LA LANDING
+══════════════════════
+
+La web funciona SIN estas imágenes: si faltan, el JS lo detecta y muestra
+una composición alternativa (balón dorado + luces) para que nada se rompa.
+Pero con ellas la landing pega mucho más fuerte.
+
+Poné aquí dos archivos con EXACTAMENTE estos nombres:
+
+  1) capibara-hero.png
+     El capibara protagonista del hero (el de la imagen de referencia:
+     sudadera negra, cadena dorada, actitud confiada).
+     Recomendado: cuadrado o 4:5, mínimo 1000 px de lado.
+
+  2) capibara-estadio.png
+     Segunda composición, el capibara en contexto de estadio.
+     Recomendado: vertical 5:6, mínimo 1000 px de ancho.
+
+CÓMO CONSEGUIRLAS
+─────────────────
+· Opción A — arrastrá aquí las imágenes que ya tenés y renombralas.
+· Opción B — la versión anterior de la web tenía el capibara incrustado
+  en base64. Recuperalo con:
+
+      python3 tools/extraer-capibara.py
+
+· Opción C — generalas con Magnific. Prompts recomendados en README.md.
+
+FORMATO
+───────
+PNG o WebP. Si usás WebP, cambiá la extensión en index.html
+(busca "capibara-hero" y "capibara-estadio").
+Ideal: comprimidas por debajo de 300 KB cada una.

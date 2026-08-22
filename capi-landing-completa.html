@@ -1,0 +1,1311 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#05070c">
+<meta name="color-scheme" content="dark">
+
+<!-- ARCHIVO ÚNICO AUTOCONTENIDO: HTML + CSS + JS en un solo fichero.
+     Subilo tal cual a cualquier hosting. El link de destino se cambia
+     en CONFIG.DESTINO, dentro del <script> al final del archivo. -->
+<title>CAPI — La emoción empieza aquí</title>
+<meta name="description" content="Entretenimiento deportivo premium. Vive cada partido al máximo, con acceso inmediato y ambiente VIP. Solo para mayores de 18 años.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://capiwara.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CAPI">
+<meta property="og:title" content="CAPI — La emoción empieza aquí">
+<meta property="og:description" content="Vive cada jugada al máximo. Acceso inmediato y ambiente premium.">
+<meta property="og:url" content="https://capiwara.com/">
+<meta property="og:image" content="https://capiwara.com/assets/img/capibara-hero.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2305070c'/%3E%3Ctext x='16' y='23' font-family='Arial Black,Arial' font-size='17' font-weight='900' text-anchor='middle' fill='%23f3c543'%3EC%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap">
+
+<style>
+/* ══════════════════════════════════════════════════════════════════════
+   CAPI — Landing fútbol premium
+   Estética: negro profundo + oro + azul eléctrico (CTA)
+   Mobile-first · sin frameworks · sin dependencias de build
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* ── Tokens ───────────────────────────────────────────────────────── */
+:root{
+  --ink:        #05070c;
+  --ink-2:      #090d16;
+  --ink-3:      #0e131f;
+  --line:       rgba(243,197,67,.16);
+
+  --gold:       #f3c543;
+  --gold-hi:    #ffe6a3;
+  --gold-deep:  #a97b12;
+
+  --blue:       #1f6bff;
+  --blue-hi:    #4f8dff;
+  --blue-deep:  #0b3aa8;
+
+  --paper:      #f5f2ea;
+  --muted:      rgba(245,242,234,.60);
+  --muted-2:    rgba(245,242,234,.40);
+
+  --display: 'Anton', 'Arial Black', 'Haettenschweiler', Impact, sans-serif;
+  --body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  --pad: clamp(20px, 5vw, 90px);
+  --maxw: 1280px;
+  --r: 18px;
+
+  --ease: cubic-bezier(.22,.61,.36,1);
+}
+
+/* ── Reset ────────────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth; scroll-padding-top:82px}
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--paper);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img,svg,canvas{display:block;max-width:100%}
+img{height:auto}
+a{color:inherit;text-decoration:none}
+ul{margin:0;padding:0;list-style:none}
+h1,h2,h3,p{margin:0}
+button,input{font:inherit}
+::selection{background:var(--gold);color:#000}
+
+.skip{
+  position:fixed;left:-9999px;top:12px;z-index:999;
+  background:var(--gold);color:#000;padding:10px 16px;border-radius:10px;font-weight:700;
+}
+.skip:focus{left:12px}
+
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px;border-radius:6px}
+
+/* ── Tipografía base ──────────────────────────────────────────────── */
+.eyebrow{
+  font-size:11.5px;
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  color:var(--gold);
+  font-weight:600;
+  margin-bottom:18px;
+}
+.eyebrow::before{
+  content:"";display:inline-block;width:26px;height:1px;
+  background:var(--gold);vertical-align:middle;margin-right:12px;opacity:.7;
+}
+
+h1,h2{
+  font-family:var(--display);
+  font-weight:400;
+  line-height:.92;
+  letter-spacing:-.01em;
+  text-transform:uppercase;
+}
+h1 em, h2 em{
+  font-style:normal;
+  background:linear-gradient(100deg,var(--gold-deep) 0%,var(--gold) 35%,var(--gold-hi) 55%,var(--gold) 75%);
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;
+  -webkit-text-fill-color:transparent;
+}
+h2{font-size:clamp(34px,6.6vw,74px)}
+h3{
+  font-family:var(--display);font-weight:400;text-transform:uppercase;
+  font-size:clamp(19px,2.4vw,25px);letter-spacing:.01em;line-height:1.05;margin-bottom:10px;
+}
+.lead{
+  font-size:clamp(15.5px,1.55vw,18.5px);
+  color:var(--muted);
+  max-width:52ch;
+}
+
+/* ── Botón azul (CTA principal) ───────────────────────────────────── */
+.btn{
+  --h:52px;
+  display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  height:var(--h);padding:0 26px;
+  border-radius:calc(var(--h)/2);
+  font-weight:700;font-size:15px;letter-spacing:.02em;
+  position:relative;isolation:isolate;
+  transition:transform .35s var(--ease), box-shadow .35s var(--ease), filter .35s var(--ease);
+  will-change:transform;
+}
+.btn svg{width:19px;height:19px;transition:transform .35s var(--ease)}
+.btn:hover svg{transform:translateX(5px)}
+
+.btn-blue{
+  color:#fff;
+  background:linear-gradient(180deg,var(--blue-hi),var(--blue) 45%,var(--blue-deep));
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.16) inset,
+    0 10px 26px -8px rgba(31,107,255,.85),
+    0 0 44px -12px rgba(79,141,255,.75);
+}
+.btn-blue::after{
+  content:"";position:absolute;inset:-2px;border-radius:inherit;z-index:-1;
+  background:radial-gradient(60% 120% at 50% 0%,rgba(120,170,255,.55),transparent 70%);
+  opacity:0;transition:opacity .35s var(--ease);
+}
+.btn-blue:hover{
+  transform:translateY(-3px);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.24) inset,
+    0 16px 34px -8px rgba(31,107,255,.95),
+    0 0 70px -10px rgba(79,141,255,.9);
+}
+.btn-blue:hover::after{opacity:1}
+.btn-blue:active{transform:translateY(-1px)}
+
+.btn-sm{--h:42px;padding:0 20px;font-size:13.5px}
+.btn-sm svg{display:none}
+.btn-lg{--h:60px;padding:0 34px;font-size:16.5px}
+.btn-xl{--h:68px;padding:0 44px;font-size:18px}
+
+/* pulso sutil sólo en el CTA grande */
+.btn-xl::before, .btn-lg::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;
+  box-shadow:0 0 0 0 rgba(79,141,255,.55);
+  animation:pulse 3.4s var(--ease) infinite;
+  pointer-events:none;
+}
+@keyframes pulse{
+  0%   {box-shadow:0 0 0 0 rgba(79,141,255,.5)}
+  70%  {box-shadow:0 0 0 22px rgba(79,141,255,0)}
+  100% {box-shadow:0 0 0 0 rgba(79,141,255,0)}
+}
+
+/* ── Splash ───────────────────────────────────────────────────────── */
+#splash{
+  position:fixed;inset:0;z-index:200;
+  background:var(--ink);
+  display:grid;place-items:center;
+  animation:splashOut .7s var(--ease) 2.6s forwards;   /* red de seguridad CSS */
+}
+#splash.is-out{animation:splashOut .7s var(--ease) forwards}
+.splash-inner{text-align:center}
+.splash-mark{
+  font-family:var(--display);font-size:clamp(44px,10vw,88px);letter-spacing:.14em;
+  color:var(--gold);display:block;
+  text-shadow:0 0 48px rgba(243,197,67,.35);
+  animation:markIn .9s var(--ease) both;
+}
+.splash-bar{display:block;width:130px;height:2px;background:rgba(243,197,67,.18);margin:22px auto 0;overflow:hidden;border-radius:2px}
+.splash-bar i{display:block;height:100%;width:0;background:var(--gold);animation:barGo 2.2s var(--ease) forwards}
+@keyframes markIn{from{opacity:0;transform:translateY(14px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes barGo{to{width:100%}}
+@keyframes splashOut{to{opacity:0;visibility:hidden;pointer-events:none}}
+
+/* ── Nav ──────────────────────────────────────────────────────────── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;gap:20px;
+  padding:16px var(--pad);
+  transition:background .45s var(--ease), backdrop-filter .45s var(--ease), border-color .45s var(--ease), padding .45s var(--ease);
+  border-bottom:1px solid transparent;
+}
+.nav.is-stuck{
+  background:rgba(5,7,12,.82);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom-color:var(--line);
+  padding-top:10px;padding-bottom:10px;
+}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-mark{
+  width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+  font-family:var(--display);font-size:19px;color:#0a0a0a;
+  background:linear-gradient(150deg,var(--gold-hi),var(--gold) 45%,var(--gold-deep));
+  box-shadow:0 6px 18px -8px rgba(243,197,67,.9);
+}
+.brand-word{font-family:var(--display);font-size:20px;letter-spacing:.16em}
+.nav-links{display:none;margin-left:auto;gap:30px}
+.nav-links a{
+  font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+  transition:color .3s;
+}
+.nav-links a:hover{color:var(--gold)}
+.nav .btn{margin-left:auto}
+.nav-links + .btn{margin-left:0}
+
+/* ── Escena de estadio (compartida) ───────────────────────────────── */
+.grain{
+  position:absolute;inset:0;pointer-events:none;opacity:.16;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+}
+.vignette{
+  position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(120% 90% at 50% 40%,transparent 35%,rgba(0,0,0,.55) 78%,#000 100%);
+}
+
+/* ── HERO ─────────────────────────────────────────────────────────── */
+.hero{
+  position:relative;
+  min-height:100svh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:120px var(--pad) 90px;
+  overflow:hidden;
+  isolation:isolate;
+}
+.hero-scene{position:absolute;inset:0;z-index:-1;background:
+  radial-gradient(90% 60% at 50% 0%, #16223d 0%, #080c16 45%, var(--ink) 100%);}
+
+/* focos */
+.lamp{
+  position:absolute;top:-6%;width:min(46vw,520px);height:min(46vw,520px);border-radius:50%;
+  filter:blur(50px);opacity:.5;
+}
+.lamp-l{left:-14%;background:radial-gradient(circle,rgba(255,214,110,.55),transparent 66%)}
+.lamp-r{right:-14%;background:radial-gradient(circle,rgba(120,170,255,.36),transparent 66%)}
+
+.floodlights{position:absolute;inset:0;overflow:hidden}
+.beam{
+  position:absolute;top:-42%;left:50%;
+  width:clamp(160px,26vw,380px);height:150%;
+  background:linear-gradient(180deg,rgba(255,224,150,.30),rgba(255,214,110,.06) 55%,transparent 82%);
+  filter:blur(24px);
+  transform-origin:top center;
+  animation:beamBreathe 7s ease-in-out infinite;
+}
+.beam-1{transform:translateX(-50%) rotate(-26deg) translateX(-52vw)}
+.beam-2{transform:translateX(-50%) rotate(-9deg)  translateX(-18vw);animation-delay:-1.6s;opacity:.8}
+.beam-3{transform:translateX(-50%) rotate(9deg)   translateX(18vw); animation-delay:-3.1s;opacity:.75;
+  background:linear-gradient(180deg,rgba(150,190,255,.24),rgba(120,170,255,.05) 55%,transparent 82%)}
+.beam-4{transform:translateX(-50%) rotate(26deg)  translateX(52vw); animation-delay:-4.7s;opacity:.65}
+@keyframes beamBreathe{0%,100%{opacity:.55}50%{opacity:.95}}
+
+/* césped en perspectiva */
+.pitch{
+  position:absolute;left:-30%;right:-30%;bottom:-8%;height:52%;
+  perspective:520px;
+  overflow:hidden;
+  mask-image:linear-gradient(180deg,transparent,#000 42%,#000 88%,transparent);
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 42%,#000 88%,transparent);
+}
+.pitch-lines{
+  position:absolute;inset:-40% 0 -20%;
+  transform:rotateX(72deg);
+  transform-origin:center bottom;
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(255,255,255,.055) 0 4px,
+      transparent 4px 132px),
+    repeating-linear-gradient(0deg,
+      rgba(255,255,255,.05) 0 3px,
+      transparent 3px 118px),
+    repeating-linear-gradient(90deg,
+      rgba(20,60,40,.55) 0 90px,
+      rgba(14,44,30,.55) 90px 180px);
+  opacity:.62;
+}
+.pitch-arc{
+  position:absolute;left:50%;bottom:6%;translate:-50% 0;
+  width:min(70vw,760px);aspect-ratio:2/1;
+  border:3px solid rgba(255,255,255,.11);
+  border-bottom:0;
+  border-radius:100% 100% 0 0 / 100% 100% 0 0;
+}
+
+#sparks{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.85}
+
+/* contenido hero */
+.hero-inner{
+  width:100%;max-width:var(--maxw);margin:0 auto;
+  display:grid;gap:clamp(28px,5vw,56px);
+  align-items:center;
+}
+.hero-copy{max-width:640px}
+.hero-title{
+  font-size:clamp(46px,12.4vw,124px);
+  margin-bottom:22px;
+}
+.hero-title .line{display:block}
+.hero-title .line:last-child{margin-left:.06em}
+
+.hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:16px 22px;margin-top:30px}
+.hero-note{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-2)}
+
+.hero-meta{
+  display:flex;flex-wrap:wrap;gap:12px 30px;margin-top:38px;
+  padding-top:24px;border-top:1px solid var(--line);
+}
+.hero-meta li{font-size:12.5px;color:var(--muted-2);letter-spacing:.06em}
+.hero-meta strong{
+  display:block;font-family:var(--display);font-size:22px;color:var(--gold);
+  letter-spacing:.04em;line-height:1.2;
+}
+
+/* figura del capibara */
+.hero-figure{position:relative;margin:0;justify-self:center;width:min(100%,520px)}
+.figure-glow{
+  position:absolute;inset:-8% -6% -14%;
+  background:radial-gradient(50% 50% at 50% 52%,rgba(243,197,67,.30),transparent 68%);
+  filter:blur(18px);
+}
+.capi{
+  position:relative;width:100%;height:auto;border-radius:26px;
+  box-shadow:0 40px 90px -40px #000, 0 0 0 1px rgba(243,197,67,.14);
+  animation:floaty 8s ease-in-out infinite;
+}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+.figure-fallback{
+  display:none;
+  aspect-ratio:1/1;border-radius:26px;
+  background:
+    radial-gradient(60% 60% at 50% 42%,rgba(243,197,67,.20),transparent 70%),
+    linear-gradient(160deg,#101827,#070a12);
+  border:1px solid var(--line);
+  place-items:center;
+}
+.hero-figure.no-img .capi{display:none}
+.hero-figure.no-img .figure-fallback{display:grid}
+
+.ball{color:var(--gold);width:46%;filter:drop-shadow(0 18px 34px rgba(0,0,0,.6));animation:spin 26s linear infinite}
+.ball-xl{width:52%}
+.ball-lg{width:40%}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.figure-badge{
+  position:absolute;right:-6px;bottom:16px;
+  background:rgba(8,11,18,.86);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border:1px solid var(--line);border-radius:14px;
+  padding:10px 16px;text-align:center;
+  box-shadow:0 18px 40px -22px #000;
+}
+.figure-badge b{display:block;font-family:var(--display);font-size:24px;color:var(--gold);line-height:1}
+.figure-badge i{font-style:normal;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2)}
+
+.scroll-cue{
+  position:absolute;left:50%;bottom:22px;translate:-50% 0;
+  width:24px;height:38px;border:1px solid var(--line);border-radius:14px;
+  display:none;place-items:start center;padding-top:7px;
+}
+.scroll-cue span{width:3px;height:7px;border-radius:2px;background:var(--gold);animation:cue 1.9s var(--ease) infinite}
+@keyframes cue{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(14px)}}
+
+/* ── Ticker ───────────────────────────────────────────────────────── */
+.ticker{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:linear-gradient(90deg,#080b12,#0d1220,#080b12);
+  overflow:hidden;padding:15px 0;
+}
+.ticker-track{
+  display:flex;align-items:center;gap:26px;width:max-content;
+  animation:slide 34s linear infinite;
+}
+.ticker-track span{
+  font-family:var(--display);font-size:clamp(16px,2.4vw,24px);
+  text-transform:uppercase;letter-spacing:.06em;color:rgba(245,242,234,.82);
+  white-space:nowrap;
+}
+.ticker-track i{color:var(--gold);font-size:9px;font-style:normal}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ── Beneficios ───────────────────────────────────────────────────── */
+.sec-head{max-width:var(--maxw);margin:0 auto clamp(34px,5vw,60px)}
+.benefits{padding:clamp(70px,10vw,130px) var(--pad)}
+
+.cards{
+  max-width:var(--maxw);margin:0 auto;
+  display:grid;gap:16px;
+  grid-template-columns:1fr;
+}
+.card{
+  position:relative;
+  padding:clamp(24px,3.4vw,34px);
+  border-radius:var(--r);
+  background:linear-gradient(165deg,rgba(255,255,255,.055),rgba(255,255,255,.014));
+  border:1px solid rgba(255,255,255,.07);
+  overflow:hidden;
+  transition:transform .5s var(--ease), border-color .5s var(--ease), background .5s var(--ease);
+  transform-style:preserve-3d;
+}
+.card::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(70% 90% at 20% 0%,rgba(243,197,67,.18),transparent 62%);
+  opacity:0;transition:opacity .5s var(--ease);
+}
+.card:hover{border-color:rgba(243,197,67,.34);background:linear-gradient(165deg,rgba(255,255,255,.085),rgba(255,255,255,.02))}
+.card:hover::before{opacity:1}
+.card-num{
+  position:absolute;top:18px;right:22px;
+  font-family:var(--display);font-size:44px;color:rgba(243,197,67,.13);line-height:1;
+}
+.card-ico{width:36px;height:36px;color:var(--gold);margin-bottom:20px}
+.card p{color:var(--muted);font-size:15px}
+
+/* ── Showcase ─────────────────────────────────────────────────────── */
+.showcase{
+  position:relative;overflow:hidden;isolation:isolate;
+  padding:clamp(70px,10vw,140px) var(--pad);
+}
+.showcase-bg{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,var(--ink),#0a1120 50%,var(--ink))}
+.stands{
+  position:absolute;inset:0 0 45% 0;
+  background:
+    repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 2px,transparent 2px 11px),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.03) 0 2px,transparent 2px 13px),
+    radial-gradient(80% 100% at 50% 100%,rgba(243,197,67,.10),transparent 70%);
+  mask-image:linear-gradient(180deg,transparent,#000 60%,transparent);
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 60%,transparent);
+  opacity:.7;
+}
+.beam-wide{
+  position:absolute;left:50%;top:-30%;translate:-50% 0;
+  width:130%;height:90%;
+  background:conic-gradient(from 200deg at 50% 0%,transparent 0deg,rgba(255,220,140,.16) 20deg,transparent 42deg,rgba(120,170,255,.12) 62deg,transparent 84deg);
+  filter:blur(30px);
+}
+
+.showcase-inner{
+  max-width:var(--maxw);margin:0 auto;
+  display:grid;gap:clamp(32px,5vw,68px);align-items:center;
+}
+.showcase-figure{margin:0}
+.frame{
+  position:relative;border-radius:22px;overflow:hidden;
+  border:1px solid var(--line);
+  box-shadow:0 50px 100px -50px #000;
+  background:linear-gradient(160deg,#101827,#070a12);
+}
+.frame::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,transparent 45%,rgba(5,7,12,.75));
+}
+/* scale extra para que el parallax nunca deje ver el borde del marco */
+.capi-2{width:100%;height:auto;object-fit:cover;aspect-ratio:5/6;transform:scale(1.08)}
+.frame-fallback{
+  display:none;aspect-ratio:5/6;place-items:center;align-content:center;gap:18px;text-align:center;
+}
+.frame-fallback span{
+  font-family:var(--display);text-transform:uppercase;letter-spacing:.2em;font-size:14px;color:var(--gold);
+}
+.showcase-figure.no-img .capi-2{display:none}
+.showcase-figure.no-img .frame-fallback{display:grid}
+
+.showcase-figure figcaption{
+  margin-top:14px;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2);
+}
+
+.stats{display:flex;flex-wrap:wrap;gap:22px 38px;margin:34px 0 34px;padding-top:26px;border-top:1px solid var(--line)}
+.stats b{
+  display:block;font-family:var(--display);font-size:clamp(32px,4.6vw,52px);
+  color:var(--gold);line-height:1;letter-spacing:.01em;
+}
+.stats span{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2)}
+
+/* ── Momentos ─────────────────────────────────────────────────────── */
+.moments{padding:clamp(70px,10vw,130px) var(--pad)}
+.moment-grid{max-width:var(--maxw);margin:0 auto;display:grid;gap:16px}
+.moment{
+  border-radius:var(--r);overflow:hidden;
+  border:1px solid rgba(255,255,255,.07);
+  background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.012));
+  transition:transform .5s var(--ease),border-color .5s var(--ease);
+}
+.moment:hover{transform:translateY(-6px);border-color:rgba(243,197,67,.3)}
+.moment-art{
+  position:relative;aspect-ratio:16/10;display:grid;place-items:center;overflow:hidden;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.moment-art .ball{width:32%}
+.art-a{background:radial-gradient(70% 80% at 50% 55%,rgba(243,197,67,.16),transparent 70%),linear-gradient(160deg,#0f1727,#070a12)}
+.art-b{background:linear-gradient(160deg,#141d31,#070a12)}
+.art-c{background:linear-gradient(160deg,#101a2e,#070a12)}
+
+.art-b .flare{
+  width:64%;aspect-ratio:1/1;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,235,180,.95),rgba(243,197,67,.35) 32%,transparent 66%);
+  filter:blur(6px);animation:flarePulse 4.5s ease-in-out infinite;
+}
+@keyframes flarePulse{0%,100%{transform:scale(.9);opacity:.7}50%{transform:scale(1.06);opacity:1}}
+
+.art-c .confetti{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(45deg,var(--gold) 0 100%),
+    linear-gradient(45deg,var(--gold-hi) 0 100%),
+    linear-gradient(45deg,var(--gold-deep) 0 100%),
+    linear-gradient(45deg,var(--gold) 0 100%),
+    linear-gradient(45deg,var(--gold-hi) 0 100%),
+    linear-gradient(45deg,var(--blue-hi) 0 100%);
+  background-repeat:no-repeat;
+  background-size:9px 14px,7px 11px,11px 7px,6px 12px,13px 6px,8px 8px;
+  background-position:14% 18%,36% 62%,58% 26%,74% 72%,88% 40%,26% 84%;
+  opacity:.85;
+  animation:confettiDrift 9s ease-in-out infinite alternate;
+}
+@keyframes confettiDrift{to{background-position:18% 74%,32% 20%,62% 78%,70% 24%,84% 82%,30% 30%}}
+
+.moment h3{padding:22px 24px 0}
+.moment p{padding:0 24px 26px;color:var(--muted);font-size:14.5px}
+
+/* ── CTA final ────────────────────────────────────────────────────── */
+.final{
+  position:relative;overflow:hidden;isolation:isolate;
+  padding:clamp(80px,12vw,160px) var(--pad);
+  text-align:center;
+}
+.final-bg{position:absolute;inset:0;z-index:-1;background:
+  radial-gradient(80% 90% at 50% 100%,#13203a 0%,#080c16 55%,var(--ink) 100%)}
+.beam-final{
+  position:absolute;left:50%;bottom:-20%;translate:-50% 0;
+  width:min(120vw,1100px);aspect-ratio:1/1;border-radius:50%;
+  background:radial-gradient(circle,rgba(31,107,255,.28),rgba(243,197,67,.12) 40%,transparent 68%);
+  filter:blur(40px);
+  animation:beamBreathe 8s ease-in-out infinite;
+}
+.final-inner{max-width:760px;margin:0 auto;display:grid;justify-items:center}
+.final .eyebrow::before{display:none}
+.final .lead{margin-top:20px}
+.final .btn{margin-top:38px}
+.final-note{margin-top:26px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2)}
+
+/* ── Footer ───────────────────────────────────────────────────────── */
+.foot{
+  padding:clamp(46px,6vw,70px) var(--pad) calc(88px + env(safe-area-inset-bottom));
+  border-top:1px solid var(--line);
+  background:var(--ink-2);
+}
+.foot-top{
+  max-width:var(--maxw);margin:0 auto;
+  display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px;
+  padding-bottom:26px;border-bottom:1px solid rgba(255,255,255,.06);
+}
+.foot-claim{font-family:var(--display);text-transform:uppercase;font-size:clamp(18px,3vw,26px);color:var(--muted)}
+.foot-bottom{max-width:var(--maxw);margin:26px auto 0;display:grid;gap:16px}
+.foot-legal{font-size:12.5px;color:var(--muted-2);max-width:70ch;line-height:1.75}
+.age{
+  display:inline-grid;place-items:center;
+  width:30px;height:30px;border-radius:50%;
+  border:1.5px solid var(--gold);color:var(--gold);
+  font-size:11px;font-weight:700;margin-right:10px;vertical-align:middle;
+}
+.foot-copy{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(245,242,234,.28)}
+
+/* ── CTA fija (móvil) ─────────────────────────────────────────────── */
+.sticky-cta{
+  position:fixed;left:14px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));
+  z-index:90;
+  height:56px;display:grid;place-items:center;
+  border-radius:28px;font-weight:700;font-size:16px;color:#fff;
+  background:linear-gradient(180deg,var(--blue-hi),var(--blue) 45%,var(--blue-deep));
+  box-shadow:0 0 0 1px rgba(255,255,255,.16) inset,0 14px 34px -10px rgba(31,107,255,.95);
+  transform:translateY(140%);
+  transition:transform .5s var(--ease);
+}
+.sticky-cta.is-on{transform:none}
+
+/* ── Reveal ───────────────────────────────────────────────────────── */
+.reveal{
+  opacity:0;transform:translateY(26px);
+  transition:opacity .85s var(--ease), transform .85s var(--ease);
+  /* Red de seguridad SÓLO CSS: si el JS no carga o llega cacheado y roto,
+     a los 5s el contenido aparece igual. Nunca texto invisible. */
+  animation:revealSafety 0s linear 5s forwards;
+}
+.reveal.is-in{opacity:1;transform:none;animation:none}
+@keyframes revealSafety{to{opacity:1;transform:none}}
+/* Defensiva obligatoria: los splits nunca quedan ocultos */
+.reveal[data-split]{opacity:1;transform:none;animation:none}
+
+/* ══════════ Breakpoints ══════════ */
+@media (min-width:600px){
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .moment-grid{grid-template-columns:repeat(3,1fr)}
+  .foot-bottom{grid-template-columns:1fr auto;align-items:end}
+}
+
+@media (min-width:900px){
+  html{scroll-padding-top:96px}
+  .nav-links{display:flex}
+  .scroll-cue{display:grid}
+  .hero{padding-top:150px}
+  .hero-inner{grid-template-columns:1.05fr .95fr}
+  .hero-figure{justify-self:end;width:min(100%,560px)}
+  .showcase-inner{grid-template-columns:.92fr 1.08fr}
+  .cards{grid-template-columns:repeat(4,1fr);gap:18px}
+  .sticky-cta{display:none}
+  .foot{padding-bottom:clamp(46px,6vw,70px)}
+}
+
+@media (min-width:1200px){
+  .hero-title{letter-spacing:-.02em}
+}
+
+/* Sólo desactivamos lo intrusivo con reduced-motion.
+   Las microinteracciones se mantienen a propósito. */
+@media (prefers-reduced-motion:reduce){
+  .ticker-track{animation:none}
+  .capi{animation:none}
+  .ball{animation:none}
+  .btn-xl::before,.btn-lg::before{animation:none}
+  .art-c .confetti{animation:none}
+}
+
+@media print{
+  .nav,.sticky-cta,.scroll-cue,#splash,.ticker{display:none!important}
+  body{background:#fff;color:#000}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ═══════════ SPLASH (doble red de seguridad: animación CSS + JS) ═══════════ -->
+<div id="splash" aria-hidden="true">
+  <div class="splash-inner">
+    <span class="splash-mark">CAPI</span>
+    <span class="splash-bar"><i></i></span>
+  </div>
+</div>
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<!-- ═══════════ NAV ═══════════ -->
+<header class="nav" id="nav">
+  <a class="brand" href="#inicio" aria-label="CAPI — inicio">
+    <span class="brand-mark">C</span>
+    <span class="brand-word">CAPI</span>
+  </a>
+  <nav class="nav-links" aria-label="Secciones">
+    <a href="#beneficios">La experiencia</a>
+    <a href="#estadio">El ambiente</a>
+  </nav>
+  <a class="btn btn-blue btn-sm" href="https://capiwara.com/" data-cta target="_blank" rel="noopener">Juega ya</a>
+</header>
+
+<main id="contenido">
+
+  <!-- ═══════════ 1 · HERO ═══════════ -->
+  <section class="hero" id="inicio">
+
+    <div class="hero-scene" aria-hidden="true">
+      <div class="floodlights">
+        <span class="beam beam-1"></span>
+        <span class="beam beam-2"></span>
+        <span class="beam beam-3"></span>
+        <span class="beam beam-4"></span>
+      </div>
+      <div class="lamp lamp-l"></div>
+      <div class="lamp lamp-r"></div>
+      <div class="pitch">
+        <div class="pitch-lines"></div>
+        <div class="pitch-arc"></div>
+      </div>
+      <canvas id="sparks"></canvas>
+      <div class="vignette"></div>
+      <div class="grain"></div>
+    </div>
+
+    <div class="hero-inner">
+
+      <div class="hero-copy">
+        <p class="eyebrow reveal">Entretenimiento deportivo premium</p>
+
+        <h1 class="hero-title reveal">
+          <span class="line">La emoción</span>
+          <span class="line"><em>empieza</em> aquí</span>
+        </h1>
+
+        <p class="lead reveal">
+          Vive cada jugada al máximo. Partidos, adrenalina y un ambiente
+          hecho para los que no se pierden un solo minuto.
+        </p>
+
+        <div class="hero-actions reveal">
+          <a class="btn btn-blue btn-lg" href="https://capiwara.com/" data-cta target="_blank" rel="noopener">
+            <span>Juega ya</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <span class="hero-note">Acceso inmediato · Sin esperas</span>
+        </div>
+
+        <ul class="hero-meta reveal">
+          <li><strong>+18</strong> Solo mayores de edad</li>
+          <li><strong>24/7</strong> Siempre abierto</li>
+          <li><strong>VIP</strong> Ambiente premium</li>
+        </ul>
+      </div>
+
+      <figure class="hero-figure reveal">
+        <div class="figure-glow" aria-hidden="true"></div>
+        <img
+          class="capi"
+          src="assets/img/capibara-hero.png"
+          alt="Capibara con actitud premium, protagonista de CAPI"
+          width="900" height="900"
+          decoding="async"
+          data-parallax="0.06">
+        <div class="figure-fallback" aria-hidden="true">
+          <svg viewBox="0 0 200 200" class="ball ball-xl"><use href="#ball"/></svg>
+        </div>
+        <span class="figure-badge" aria-hidden="true">
+          <b>90'</b><i>de pura emoción</i>
+        </span>
+      </figure>
+
+    </div>
+
+    <a class="scroll-cue" href="#beneficios" aria-label="Bajar">
+      <span></span>
+    </a>
+  </section>
+
+  <!-- ═══════════ TICKER ═══════════ -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track" id="ticker">
+      <span>Vive cada jugada</span><i>●</i>
+      <span>Acceso inmediato</span><i>●</i>
+      <span>Ambiente premium</span><i>●</i>
+      <span>Sentí la intensidad del momento</span><i>●</i>
+      <span>Todo listo para empezar</span><i>●</i>
+    </div>
+  </div>
+
+  <!-- ═══════════ 2 · BENEFICIOS ═══════════ -->
+  <section class="benefits" id="beneficios">
+    <header class="sec-head">
+      <p class="eyebrow reveal">La experiencia</p>
+      <h2 class="reveal">Tu próxima gran jugada<br><em>te está esperando</em></h2>
+    </header>
+
+    <div class="cards">
+
+      <article class="card reveal" data-tilt>
+        <span class="card-num">01</span>
+        <svg class="card-ico" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M24 5 8 13v11c0 10 6.8 16.7 16 19 9.2-2.3 16-9 16-19V13L24 5Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+          <path d="m17 24 5 5 10-11" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h3>Emoción real</h3>
+        <p>Cada partido se siente distinto. Adrenalina de principio a fin, sin tiempos muertos.</p>
+      </article>
+
+      <article class="card reveal" data-tilt>
+        <span class="card-num">02</span>
+        <svg class="card-ico" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M26 4 10 27h11l-3 17 20-24H26l3-16Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+        </svg>
+        <h3>Acceso inmediato</h3>
+        <p>Un toque y estás dentro. Nada de vueltas: entrás y la acción ya está corriendo.</p>
+      </article>
+
+      <article class="card reveal" data-tilt>
+        <span class="card-num">03</span>
+        <svg class="card-ico" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M8 10h32v8a8 8 0 0 1-8 8H16a8 8 0 0 1-8-8v-8Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+          <path d="M40 12h4a5 5 0 0 1-5 8M8 12H4a5 5 0 0 0 5 8M24 26v8m-8 8h16m-11-8h6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+        <h3>Ambiente premium</h3>
+        <p>Detalles cuidados, ritmo cuidado. Una atmósfera pensada para disfrutar en grande.</p>
+      </article>
+
+      <article class="card reveal" data-tilt>
+        <span class="card-num">04</span>
+        <svg class="card-ico" viewBox="0 0 48 48" aria-hidden="true">
+          <circle cx="24" cy="24" r="18" fill="none" stroke="currentColor" stroke-width="2.4"/>
+          <path d="M24 12l8.5 6.2-3.2 10H18.7l-3.2-10L24 12Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
+        </svg>
+        <h3>Vive cada jugada</h3>
+        <p>Seguí el juego con toda la intensidad del momento, desde donde estés y cuando quieras.</p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ═══════════ 3 · SECCIÓN VISUAL SECUNDARIA ═══════════ -->
+  <section class="showcase" id="estadio">
+    <div class="showcase-bg" aria-hidden="true">
+      <div class="stands"></div>
+      <div class="beam-wide"></div>
+      <div class="grain"></div>
+    </div>
+
+    <div class="showcase-inner">
+
+      <figure class="showcase-figure reveal">
+        <div class="frame">
+          <img
+            class="capi-2"
+            src="assets/img/capibara-estadio.png"
+            alt="El capibara de CAPI en pleno ambiente de estadio"
+            width="1000" height="1200"
+            loading="lazy" decoding="async"
+            data-parallax="0.05">
+          <div class="frame-fallback" aria-hidden="true">
+            <svg viewBox="0 0 200 200" class="ball ball-lg"><use href="#ball"/></svg>
+            <span>Noche de partido</span>
+          </div>
+        </div>
+        <figcaption>Luces encendidas. Empieza el show.</figcaption>
+      </figure>
+
+      <div class="showcase-copy">
+        <p class="eyebrow reveal">El ambiente</p>
+        <h2 class="reveal">Entrá al juego<br><em>como se debe</em></h2>
+        <p class="lead reveal">
+          Luces de estadio, hinchada al máximo y esa sensación de que algo grande
+          está por pasar. Así se siente cada noche acá dentro.
+        </p>
+
+        <ul class="stats reveal">
+          <li><b data-count="90" data-suffix="'">0</b><span>minutos de intensidad</span></li>
+          <li><b data-count="24" data-suffix="/7">0</b><span>siempre disponible</span></li>
+          <li><b data-count="100" data-suffix="%">0</b><span>emoción, cero espera</span></li>
+        </ul>
+
+        <a class="btn btn-blue btn-lg reveal" href="https://capiwara.com/" data-cta target="_blank" rel="noopener">
+          <span>Juega ya</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════ 4 · MOMENTOS ═══════════ -->
+  <section class="moments">
+    <header class="sec-head">
+      <p class="eyebrow reveal">Momentos</p>
+      <h2 class="reveal">Todo lo que hace grande<br><em>una noche de fútbol</em></h2>
+    </header>
+
+    <div class="moment-grid">
+      <article class="moment reveal">
+        <div class="moment-art art-a" aria-hidden="true"><svg viewBox="0 0 200 200" class="ball"><use href="#ball"/></svg></div>
+        <h3>La jugada</h3>
+        <p>Ese segundo en que todo el estadio contiene la respiración.</p>
+      </article>
+      <article class="moment reveal">
+        <div class="moment-art art-b" aria-hidden="true"><span class="flare"></span></div>
+        <h3>El grito</h3>
+        <p>Cuando la pelota entra y la tribuna explota de golpe.</p>
+      </article>
+      <article class="moment reveal">
+        <div class="moment-art art-c" aria-hidden="true"><span class="confetti"></span></div>
+        <h3>La celebración</h3>
+        <p>Luces, oro y una noche que no querés que se termine.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ═══════════ 5 · CTA FINAL ═══════════ -->
+  <section class="final" id="entrar">
+    <div class="final-bg" aria-hidden="true">
+      <div class="beam-final"></div>
+      <div class="grain"></div>
+    </div>
+    <div class="final-inner">
+      <p class="eyebrow reveal">Todo listo para empezar</p>
+      <h2 class="reveal">Sentí la intensidad<br><em>del momento</em></h2>
+      <p class="lead reveal">Un clic y estás adentro. La noche ya arrancó.</p>
+      <a class="btn btn-blue btn-xl reveal" href="https://capiwara.com/" data-cta target="_blank" rel="noopener">
+        <span>Juega ya</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <p class="final-note reveal">Contenido de entretenimiento para mayores de 18 años.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="foot">
+  <div class="foot-top">
+    <a class="brand" href="#inicio">
+      <span class="brand-mark">C</span>
+      <span class="brand-word">CAPI</span>
+    </a>
+    <p class="foot-claim">La emoción empieza aquí.</p>
+  </div>
+  <div class="foot-bottom">
+    <p class="foot-legal">
+      <span class="age">+18</span>
+      Entretenimiento para mayores de 18 años. Jugá con responsabilidad y
+      dentro de tus posibilidades. Si sentís que el juego deja de ser
+      diversión, buscá ayuda.
+    </p>
+    <p class="foot-copy">© <span id="year">2026</span> CAPI · Todos los derechos reservados</p>
+  </div>
+</footer>
+
+<!-- CTA fija en móvil -->
+<a class="sticky-cta" href="https://capiwara.com/" data-cta target="_blank" rel="noopener" id="stickyCta">Juega ya</a>
+
+<!-- Sprite SVG (balón reutilizable) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="ball" viewBox="0 0 200 200">
+    <circle cx="100" cy="100" r="92" fill="#0b0f18" stroke="currentColor" stroke-width="5"/>
+    <path d="M100 58l34 24.7-13 40h-42l-13-40L100 58Z" fill="currentColor" opacity=".92"/>
+    <path d="M100 8v50M18.5 82.5l47 15.5M181.5 82.5l-47 15.5M55.5 176l23.5-33M144.5 176L121 143"
+          stroke="currentColor" stroke-width="5" stroke-linecap="round" fill="none" opacity=".8"/>
+    <path d="M30 148a92 92 0 0 1-11.5-65.5M170 148a92 92 0 0 0 11.5-65.5M62 21.5a92 92 0 0 1 76 0"
+          stroke="currentColor" stroke-width="4" fill="none" opacity=".35"/>
+  </symbol>
+</svg>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   CAPI — main.js
+   Patrón IIFE clásico (sin módulos ES, sin imports, sin npm).
+   Cada init va envuelto en safe() para que un fallo no tumbe el resto.
+   ══════════════════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+
+  /* ────────────────────────────────────────────────────────────────
+     ⚙️  CONFIGURACIÓN — LO ÚNICO QUE NECESITÁS TOCAR
+     ────────────────────────────────────────────────────────────────
+     Cambiá DESTINO por el link de la plataforma.
+     Se aplica automáticamente a TODOS los botones azules de la página.
+     (En el HTML ya está puesto el mismo link como respaldo, por si el
+      JS no llega a ejecutarse.)
+  */
+  var CONFIG = {
+    DESTINO: 'https://capiwara.com/',
+    NUEVA_PESTANA: true          // true = abre en pestaña nueva
+  };
+  window.__CAPI__ = CONFIG;
+
+  /* ── util ─────────────────────────────────────────────────────── */
+  function safe(fn, name) {
+    try { fn(); } catch (e) {
+      if (window.console && console.warn) console.warn('[CAPI] ' + name + ':', e);
+    }
+  }
+  function $(s, c) { return (c || document).querySelector(s); }
+  function $$(s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); }
+
+  var reducedMotion = false;
+  try {
+    reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  } catch (e) {}
+  // Ojo: NO usamos reducedMotion para apagar microinteracciones (Windows lo
+  // trae activado por defecto en muchos equipos). Sólo para el canvas.
+
+  /* ── 1 · Splash ───────────────────────────────────────────────── */
+  function initSplash() {
+    var splash = $('#splash');
+    if (!splash) return;
+    var out = function () { splash.classList.add('is-out'); };
+    // Se va cuando carga todo…
+    window.addEventListener('load', function () { setTimeout(out, 380); });
+    // …y pase lo que pase, a los 2.8s (además de la animación CSS de respaldo)
+    setTimeout(out, 2800);
+    setTimeout(function () { if (splash.parentNode) splash.parentNode.removeChild(splash); }, 6000);
+  }
+
+  /* ── 2 · CTA: un solo link para todos los botones ─────────────── */
+  function initCta() {
+    var url = String(CONFIG.DESTINO || '').trim();
+    var valid = /^https?:\/\/\S+$/i.test(url);
+    $$('[data-cta]').forEach(function (a) {
+      if (valid) {
+        a.setAttribute('href', url);
+        if (CONFIG.NUEVA_PESTANA) {
+          a.setAttribute('target', '_blank');
+          a.setAttribute('rel', 'noopener noreferrer');
+        } else {
+          a.removeAttribute('target');
+        }
+      }
+      // pequeño feedback táctil
+      a.addEventListener('pointerdown', function () {
+        a.style.transform = 'translateY(-1px) scale(.985)';
+      });
+      a.addEventListener('pointerup', function () { a.style.transform = ''; });
+      a.addEventListener('pointerleave', function () { a.style.transform = ''; });
+    });
+    if (!valid && window.console) {
+      console.warn('[CAPI] Poné tu link en CONFIG.DESTINO (main.js). Se usa el href del HTML.');
+    }
+  }
+
+  /* ── 3 · Reveal on scroll ─────────────────────────────────────── */
+  function initReveal() {
+    var items = $$('.reveal');
+    if (!items.length) return;
+
+    var showAll = function () {
+      items.forEach(function (el) { el.classList.add('is-in'); });
+    };
+
+    if (!('IntersectionObserver' in window)) { showAll(); return; }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var el = en.target;
+        // escalonado suave dentro de cada bloque
+        var sibs = el.parentNode ? $$('.reveal', el.parentNode) : [el];
+        var i = sibs.indexOf(el);
+        el.style.transitionDelay = (i > 0 ? Math.min(i, 5) * 90 : 0) + 'ms';
+        el.classList.add('is-in');
+        io.unobserve(el);
+      });
+    }, { threshold: 0.03, rootMargin: '0px 0px -6% 0px' });
+
+    items.forEach(function (el) { io.observe(el); });
+
+    // Red de seguridad: a los 6s nada puede seguir oculto
+    setTimeout(showAll, 6000);
+  }
+
+  /* ── 4 · Nav sticky ───────────────────────────────────────────── */
+  function initNav() {
+    var nav = $('#nav');
+    var sticky = $('#stickyCta');
+    if (!nav) return;
+    var tick = false;
+    function onScroll() {
+      if (tick) return;
+      tick = true;
+      requestAnimationFrame(function () {
+        var y = window.pageYOffset || document.documentElement.scrollTop;
+        nav.classList.toggle('is-stuck', y > 40);
+        if (sticky) sticky.classList.toggle('is-on', y > window.innerHeight * 0.7);
+        tick = false;
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  /* ── 5 · Anchors con scroll nativo ────────────────────────────── */
+  function initAnchors() {
+    $$('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var id = a.getAttribute('href');
+        if (!id || id === '#') return;
+        var t = document.querySelector(id);
+        if (!t) return;
+        e.preventDefault();
+        var top = t.getBoundingClientRect().top + (window.pageYOffset || 0) - 80;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      });
+    });
+  }
+
+  /* ── 6 · Parallax suave ───────────────────────────────────────── */
+  function initParallax() {
+    var els = $$('[data-parallax]');
+    if (!els.length || window.innerWidth < 760) return;
+    var tick = false;
+    function run() {
+      if (tick) return;
+      tick = true;
+      requestAnimationFrame(function () {
+        var vh = window.innerHeight;
+        els.forEach(function (el) {
+          var r = el.getBoundingClientRect();
+          if (r.bottom < -200 || r.top > vh + 200) return;
+          var k = parseFloat(el.getAttribute('data-parallax')) || 0.05;
+          var mid = r.top + r.height / 2 - vh / 2;
+          el.style.setProperty('--py', (-mid * k).toFixed(1) + 'px');
+          el.style.translate = '0 ' + (-mid * k).toFixed(1) + 'px';
+        });
+        tick = false;
+      });
+    }
+    window.addEventListener('scroll', run, { passive: true });
+    window.addEventListener('resize', run);
+    run();
+  }
+
+  /* ── 7 · Contadores ───────────────────────────────────────────── */
+  function initCounters() {
+    var nums = $$('[data-count]');
+    if (!nums.length) return;
+
+    function animate(el) {
+      if (el.dataset.done === '1') return;   // idempotente
+      el.dataset.done = '1';
+      var end = parseFloat(el.getAttribute('data-count')) || 0;
+      var suffix = el.getAttribute('data-suffix') || '';
+      var dur = 1400, t0 = null;
+      function step(t) {
+        if (t0 === null) t0 = t;
+        var p = Math.min((t - t0) / dur, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(end * eased) + suffix;
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    if (!('IntersectionObserver' in window)) {
+      nums.forEach(animate); return;
+    }
+    var io = new IntersectionObserver(function (en) {
+      en.forEach(function (e) {
+        if (e.isIntersecting) { animate(e.target); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.05 });
+    nums.forEach(function (n) { io.observe(n); });
+    setTimeout(function () { nums.forEach(animate); }, 6000);
+  }
+
+  /* ── 8 · Tilt en tarjetas (sólo puntero fino) ─────────────────── */
+  function initTilt() {
+    var fine = false;
+    try { fine = window.matchMedia('(hover:hover) and (pointer:fine)').matches; } catch (e) {}
+    if (!fine) return;
+
+    $$('[data-tilt]').forEach(function (card) {
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width - 0.5;
+        var y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform =
+          'perspective(900px) rotateX(' + (-y * 5).toFixed(2) + 'deg) rotateY(' +
+          (x * 6).toFixed(2) + 'deg) translateY(-5px)';
+      });
+      card.addEventListener('pointerleave', function () { card.style.transform = ''; });
+    });
+  }
+
+  /* ── 9 · Ticker infinito (duplica el contenido una sola vez) ──── */
+  function initTicker() {
+    var track = $('#ticker');
+    if (!track || track.dataset.cloned === '1') return;
+    track.dataset.cloned = '1';
+    track.innerHTML = track.innerHTML + track.innerHTML;
+  }
+
+  /* ── 10 · Chispas doradas (canvas ligero) ─────────────────────── */
+  function initSparks() {
+    var cv = $('#sparks');
+    if (!cv || reducedMotion) return;
+    var ctx = cv.getContext && cv.getContext('2d');
+    if (!ctx) return;
+
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w = 0, h = 0, parts = [], raf = null, running = true;
+
+    function resize() {
+      var r = cv.getBoundingClientRect();
+      w = r.width; h = r.height;
+      cv.width = Math.round(w * dpr);
+      cv.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      build();
+    }
+
+    function build() {
+      var n = w < 700 ? 26 : w < 1200 ? 44 : 62;
+      parts = [];
+      for (var i = 0; i < n; i++) {
+        parts.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 1.9 + 0.5,
+          vy: -(Math.random() * 0.22 + 0.06),
+          vx: (Math.random() - 0.5) * 0.16,
+          a: Math.random() * 0.55 + 0.15,
+          p: Math.random() * Math.PI * 2
+        });
+      }
+    }
+
+    function draw() {
+      if (!running) return;
+      ctx.clearRect(0, 0, w, h);
+      for (var i = 0; i < parts.length; i++) {
+        var p = parts[i];
+        p.y += p.vy; p.x += p.vx; p.p += 0.02;
+        if (p.y < -12) { p.y = h + 10; p.x = Math.random() * w; }
+        if (p.x < -12) p.x = w + 10;
+        if (p.x > w + 12) p.x = -10;
+        var tw = p.a * (0.6 + 0.4 * Math.sin(p.p));
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,214,110,' + tw.toFixed(3) + ')';
+        ctx.fill();
+      }
+      raf = requestAnimationFrame(draw);
+    }
+
+    resize();
+    draw();
+
+    var rt;
+    window.addEventListener('resize', function () {
+      clearTimeout(rt); rt = setTimeout(resize, 180);
+    });
+
+    // pausa cuando el hero sale de pantalla (ahorra batería)
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) {
+        en.forEach(function (e) {
+          running = e.isIntersecting;
+          if (running && !raf) draw();
+          if (!running && raf) { cancelAnimationFrame(raf); raf = null; }
+        });
+      }, { threshold: 0.02 }).observe(cv);
+    }
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) { running = false; if (raf) { cancelAnimationFrame(raf); raf = null; } }
+      else { running = true; if (!raf) draw(); }
+    });
+  }
+
+  /* ── 11 · Imágenes opcionales: si faltan, la escena sigue viva ── */
+  function initImageFallbacks() {
+    [['.capi', '.hero-figure'], ['.capi-2', '.showcase-figure']].forEach(function (pair) {
+      var img = $(pair[0]);
+      var box = $(pair[1]);
+      if (!img || !box) return;
+      var fail = function () { box.classList.add('no-img'); };
+      if (img.complete && img.naturalWidth === 0) fail();
+      img.addEventListener('error', fail);
+    });
+  }
+
+  /* ── 12 · Año del footer ──────────────────────────────────────── */
+  function initYear() {
+    var y = $('#year');
+    if (y) y.textContent = new Date().getFullYear();
+  }
+
+  /* ── Arranque ─────────────────────────────────────────────────── */
+  function boot() {
+    safe(initSplash, 'splash');
+    safe(initImageFallbacks, 'imagenes');
+    safe(initCta, 'cta');
+    safe(initReveal, 'reveal');
+    safe(initNav, 'nav');
+    safe(initAnchors, 'anchors');
+    safe(initParallax, 'parallax');
+    safe(initCounters, 'counters');
+    safe(initTilt, 'tilt');
+    safe(initTicker, 'ticker');
+    safe(initSparks, 'sparks');
+    safe(initYear, 'year');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+})();
+
+</script>
+</body>
+</html>

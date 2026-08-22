@@ -1,0 +1,70 @@
+# ══════════════════════════════════════════════════════════════════
+# CAPI — configuración para Hostinger / Apache
+# Objetivo principal: que al subir una versión nueva el navegador NO
+# siga mostrando el CSS/JS viejo durante días.
+# ══════════════════════════════════════════════════════════════════
+
+# ── Compresión ────────────────────────────────────────────────────
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript
+  AddOutputFilterByType DEFLATE application/javascript application/x-javascript
+  AddOutputFilterByType DEFLATE application/json image/svg+xml
+</IfModule>
+
+# ── Tipos MIME ────────────────────────────────────────────────────
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType image/avif .avif
+  AddType font/woff2 .woff2
+</IfModule>
+
+# ── Caché por tipo ────────────────────────────────────────────────
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # HTML: nunca cachear (así siempre lee los ?v= nuevos)
+  ExpiresByType text/html "access plus 0 seconds"
+
+  # CSS / JS: cache corto — el cache-buster ?v=YYYYMMDD hace el resto
+  ExpiresByType text/css "access plus 1 hours"
+  ExpiresByType application/javascript "access plus 1 hours"
+  ExpiresByType text/javascript "access plus 1 hours"
+
+  # Imágenes y fuentes: cache largo
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "no-cache, must-revalidate, max-age=0"
+  </FilesMatch>
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=3600, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "\.(webp|png|jpe?g|svg|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Seguridad básica
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+</IfModule>
+
+# ── Páginas de error → index ──────────────────────────────────────
+ErrorDocument 404 /index.html
+
+# ── HTTPS + sin www (descomentá si tu dominio ya tiene SSL) ───────
+# <IfModule mod_rewrite.c>
+#   RewriteEngine On
+#   RewriteCond %{HTTPS} off
+#   RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+#   RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+#   RewriteRule ^(.*)$ https://%1%{REQUEST_URI} [L,R=301]
+# </IfModule>
+
+Options -Indexes
