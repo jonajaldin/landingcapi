@@ -1,33 +1,40 @@
 IMÁGENES DE LA LANDING
 ══════════════════════
 
-La web funciona SIN estas imágenes: si faltan, el JS lo detecta y muestra
-una composición alternativa (balón dorado + luces) para que nada se rompa.
-Pero con ellas la landing pega mucho más fuerte.
+La web funciona SIN estas imágenes: si falta alguna, el JS lo detecta y
+muestra un balón dorado en su lugar. Pero con ellas pega mucho más fuerte.
 
-Poné aquí dos archivos con EXACTAMENTE estos nombres:
+Poné aquí los archivos con EXACTAMENTE estos nombres:
 
-  1) capibara-hero.png
-     El capibara protagonista del hero (el de la imagen de referencia:
-     sudadera negra, cadena dorada, actitud confiada).
-     Recomendado: cuadrado o 4:5, mínimo 1000 px de lado.
+  1) jugador.png          ← LA CARTA DE JUGADOR (la foto que pasaste)
+     El jugador con la camiseta de CAPIWARA.COM y el balón.
+     Va dentro de un marco dorado inclinado, con degradado inferior y
+     placa con el nombre, así que NO hace falta recortar el fondo gris:
+     el marco y el degradado lo integran solos.
+     Recomendado: cuadrada o 3:4, mínimo 1000 px de lado.
 
-  2) capibara-estadio.png
-     Segunda composición, el capibara en contexto de estadio.
-     Recomendado: vertical 5:6, mínimo 1000 px de ancho.
+  2) capibara-hero.png    ← EL CAPIBARA
+     Va delante de la carta, abajo a la izquierda, superpuesto.
+     Acá SÍ conviene fondo transparente (PNG recortado): al estar
+     encima de la carta, un fondo sólido se notaría como un recuadro.
+     Recomendado: vertical 4:5, mínimo 900 px de ancho.
 
-CÓMO CONSEGUIRLAS
-─────────────────
-· Opción A — arrastrá aquí las imágenes que ya tenés y renombralas.
-· Opción B — la versión anterior de la web tenía el capibara incrustado
-  en base64. Recuperalo con:
+SI QUERÉS CAMBIAR EL ENCUADRE DE LA FOTO DEL JUGADOR
+────────────────────────────────────────────────────
+En styles.css, regla .pimg :
 
-      python3 tools/extraer-capibara.py
+    object-position: 52% 16%;
 
-· Opción C — generalas con Magnific. Prompts recomendados en README.md.
+El primer número mueve la foto en horizontal, el segundo en vertical.
+Bajá el segundo (por ejemplo 8%) si querés ver más cara; subilo (30%)
+si querés ver más camiseta y balón.
+
+NÚMERO DE LA CARTA
+──────────────────
+El "10" de la esquina está en index.html, en <span class="pcard-num">.
 
 FORMATO
 ───────
 PNG o WebP. Si usás WebP, cambiá la extensión en index.html
-(busca "capibara-hero" y "capibara-estadio").
-Ideal: comprimidas por debajo de 300 KB cada una.
+(buscá "jugador" y "capibara-hero").
+Ideal: por debajo de 300 KB cada una.

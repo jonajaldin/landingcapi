@@ -1,25 +1,31 @@
-# CAPI — Landing fútbol premium
+# CAPIWARA.COM — Landing de una sola pantalla
 
-Landing de una sola página, HTML + CSS + JS vanilla. **Sin frameworks, sin npm, sin build.**
-Se sube arrastrando la carpeta a Hostinger, Netlify o cualquier hosting estático.
+HTML + CSS + JS vanilla. **Sin frameworks, sin npm, sin build.** Todo entra en
+el viewport: no hay scroll, no hay secciones debajo.
 
 ```
-index.html          ← la página
-styles.css          ← todo el diseño
-main.js             ← animaciones + configuración del link
-.htaccess           ← caché correcta en Hostinger (importante)
+index.html                  ← la página
+styles.css                  ← todo el diseño
+main.js                     ← animaciones + el link de destino
+capi-landing-completa.html  ← las tres anteriores fundidas en un solo archivo
+.htaccess                   ← caché correcta en Hostinger (importante)
 robots.txt
-assets/img/         ← acá van las 2 imágenes del capibara
-tools/              ← utilidad opcional
+assets/img/                 ← las dos imágenes (ver LEEME.txt)
+tools/                      ← utilidades de desarrollo, no hace falta subirlas
 ```
+
+Dos formas de publicar, elegí una:
+
+- **Rápida** — subí solo `capi-landing-completa.html` (renombralo `index.html`)
+  y la carpeta `assets/`.
+- **Hostinger** — subí todo. El `.htaccess` evita que te sirva CSS viejo
+  durante días después de cada actualización.
 
 ---
 
-## 1. Cambiar el link de destino (lo único obligatorio)
+## 1. El link de destino
 
-El link está en **dos sitios**, a propósito (uno es el respaldo del otro):
-
-**`main.js`**, arriba del todo:
+En `main.js` (o dentro del `<script>` final, si usás el archivo único):
 
 ```js
 var CONFIG = {
@@ -28,113 +34,91 @@ var CONFIG = {
 };
 ```
 
-**`index.html`** — buscá `https://capiwara.com/` y reemplazá las 4 apariciones
-(los `href` de los botones azules). Si no lo hacés, el JS igual pisa el valor
-al cargar; el HTML es sólo la red de seguridad por si el JS falla.
+También está escrito en los `href` del HTML como respaldo, por si el JS no
+llega a ejecutarse. El JS lo pisa al cargar.
 
-> Se usó `https://capiwara.com/` como valor por defecto porque es el destino
-> que tenía la versión anterior del repo. En el brief el link venía como
-> `[PEGA_AQUÍ_EL_LINK]`, sin rellenar.
+## 2. Las dos imágenes
 
----
+Ver `assets/img/LEEME.txt`. Resumen:
 
-## 2. Las imágenes del capibara
+| Archivo | Dónde va | Fondo |
+|---|---|---|
+| `jugador.png` | Dentro de la carta con marco dorado | Da igual, el marco lo integra |
+| `capibara-hero.png` | Delante de la carta, abajo a la izquierda | Transparente (PNG recortado) |
 
-Ver `assets/img/LEEME.txt`. Resumen: dos archivos,
-`capibara-hero.png` y `capibara-estadio.png`.
+Si falta alguna, `main.js` lo detecta y muestra un balón tenue en su lugar: la
+página no se rompe, sólo pega menos.
 
-Si no están, **la web no se rompe**: `main.js` detecta el error de carga y
-activa una composición alternativa (balón dorado sobre luces de estadio).
-
-### Prompts listos para Magnific
-
-*Hero (proporción 4:5 o 1:1):*
-
-> Ultra-realistic cinematic 3D render of a charismatic capybara mascot with a
-> calm, confident expression, wearing an elegant black hoodie and a subtle gold
-> chain, standing on a football pitch at night. Warm golden stadium floodlights
-> and lens flares behind him, blurred packed crowd in the stands, a football at
-> his feet, golden particles floating in the air. Deep black and warm gold
-> colour grading, luxury sports photography, shallow depth of field. No text,
-> no logos, no brand marks.
-
-*Sección "El ambiente" (proporción 5:6, vertical):*
-
-> Cinematic vertical composition: the same capybara character celebrating on a
-> floodlit football pitch at night, arms raised, golden confetti falling,
-> stadium stands glowing behind, dramatic rim light, black and gold palette,
-> premium editorial sports photography, volumetric light beams. No text, no
-> logos.
-
-Después pasalo por **upscale** (modo `creative`, preset `subtle`, 2x) para
-que aguante en pantallas grandes.
-
-### Sobre jugadores reales
-
-El brief pedía jugadores de fútbol reconocibles. La landing **no** los incluye:
-usar la imagen o el parecido de futbolistas identificables en una pieza
-comercial requiere derechos de imagen, y generarlos con IA para publicidad es
-un problema legal real, no un tecnicismo. El universo futbolero se construye
-con estadio, luces, césped en perspectiva, balón, hinchada y confeti — que es
-lo que transmite la energía sin exponerte. Si conseguís licencias de imágenes
-de jugadores, se enchufan en `.moment-art` sin tocar nada más.
+Para reencuadrar la foto del jugador, en `styles.css` → `.pimg` →
+`object-position: 52% 16%`. Bajá el segundo número para ver más cara.
 
 ---
 
-## 3. Subir a Hostinger
+## 3. Qué hay en pantalla
 
-1. Entrá al Administrador de Archivos → carpeta `public_html`.
-2. Subí **todo** el contenido de esta carpeta (incluido el `.htaccess`,
-   que suele estar oculto — activá "mostrar archivos ocultos").
-3. Listo.
+Ticker arriba y abajo (girando en sentidos opuestos), marca centrada, bloque de
+texto a la izquierda con el CTA azul, y a la derecha la carta de jugador con el
+capibara delante.
 
-En Netlify: arrastrá la carpeta a `app.netlify.com/drop`.
+**El estadio es CSS puro:** cinco haces de luz que barren a ritmos distintos,
+tribuna que parpadea, césped en perspectiva con `rotateX(74deg)`, arco del área,
+viñeta y grano. Cero peso extra.
+
+**Encima corren:** un balón que cruza la pantalla en arco cada 8 s, monedas
+flotando, 30–80 chispas doradas en canvas, confeti, el degradado dorado del
+titular en movimiento, el pulso del CTA y un parallax de cuatro capas que sigue
+al mouse.
+
+**Los cuatro jugadores del fondo son siluetas SVG**, articuladas con cápsulas
+rotadas: remate, carrera y celebración. No son fotos — pesan prácticamente nada
+y no dependen de derechos de imagen de nadie.
+
+### Decisiones que conviene no deshacer
+
+- **`prefers-reduced-motion` no apaga las microinteracciones.** Windows lo trae
+  activado de fábrica en muchos equipos y dejaría la página muerta. Sólo apaga
+  el confeti, el balón que cruza, los destellos y los bucles infinitos.
+- **Nada de `<script type="module">`.** Funciona hasta abriendo el archivo con
+  doble clic.
+- **Cada `init` va dentro de `safe()`**: si uno falla, los demás siguen.
+- **El destello del titular se quitó a propósito.** Con `background-clip:text`,
+  tanto `mix-blend-mode:overlay` como `filter:drop-shadow` pintan la caja del
+  elemento en vez de las letras, y dejaban un recuadro gris visible detrás de
+  "AL MÁXIMO".
 
 ### Cada vez que actualices
 
 Cambiá la fecha del cache-buster en `index.html`:
 
 ```html
-<link rel="stylesheet" href="styles.css?v=20260822">
-<script defer src="main.js?v=20260822"></script>
+<link rel="stylesheet" href="styles.css?v=20260822b">
+<script defer src="main.js?v=20260822b"></script>
 ```
 
-Poné la fecha del día (`?v=20260901`, etc.). Sin esto, Hostinger puede seguir
-sirviendo el CSS viejo durante días.
+Sin esto, Hostinger puede seguir sirviendo el CSS viejo durante días.
 
 ---
 
-## 4. Detalles del diseño
+## 4. Herramientas de desarrollo
 
-- **Paleta:** negro profundo `#05070c` + oro `#f3c543` + azul eléctrico
-  `#1f6bff` reservado **sólo** para el CTA, para que no compita con nada.
-- **Tipografía:** Anton (display, condensada y deportiva) + Inter (texto).
-  Con fallback a Arial Black / system UI si Google Fonts no carga.
-- **Escena de estadio:** hecha íntegramente en CSS — focos con `conic-gradient`,
-  césped en perspectiva 3D con `rotateX(72deg)`, arco del área, viñeta y grano.
-  Cero peso extra.
-- **Chispas doradas:** canvas 2D con 26–62 partículas según ancho; se pausa
-  sola cuando el hero sale de pantalla o la pestaña queda en segundo plano.
-- **CTA:** 4 botones azules (nav, hero, showcase, final) + una barra fija
-  inferior en móvil que aparece pasado el 70 % del primer scroll.
+```bash
+# Rehacer el archivo único después de tocar los tres sueltos
+python3 tools/build-unico.py
 
-### Robustez
-
-- Cada `init` va dentro de `safe()`: si uno falla, los demás siguen.
-- `.reveal` tiene red de seguridad **en CSS** (`animation ... 5s forwards`) y
-  otra en JS (timeout de 6 s). Nunca puede quedar texto invisible.
-- Splash con triple salida: `load`, timeout de 2,8 s y animación CSS a los 2,6 s.
-- `prefers-reduced-motion` **no** apaga las microinteracciones (Windows lo trae
-  activado por defecto en muchos equipos y dejaría la web muerta); sólo apaga
-  el canvas, el ticker y los bucles infinitos.
-- Sin `<script type="module">`, sin imports relativos: funciona hasta abriendo
-  `index.html` con doble clic.
+# Ver cómo queda (captura desktop + móvil en tools/)
+NODE_PATH=/opt/node22/lib/node_modules node tools/shot.js
+```
 
 ---
 
 ## 5. Nota legal
 
-El pie incluye aviso `+18` y mensaje de juego responsable. Revisalo con la
-normativa del país donde vayas a comprar tráfico: varias jurisdicciones exigen
-textos, licencias o enlaces a organismos de ayuda concretos, y las plataformas
-de ads rechazan creatividades sin ellos.
+El pie lleva aviso `+18` y mensaje de juego responsable. Revisalo contra la
+normativa del país donde compres tráfico: varias jurisdicciones exigen textos,
+licencias o enlaces a organismos de ayuda concretos, y las plataformas de ads
+rechazan creatividades sin ellos.
+
+Sobre imágenes de futbolistas: usar el parecido de un jugador real e
+identificable en una pieza comercial necesita derechos de imagen. Por eso las
+siluetas del fondo son anónimas. Si ponés una foto de una persona reconocible en
+`jugador.png`, asegurate de tener la licencia antes de invertir en anuncios.
