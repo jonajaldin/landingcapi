@@ -768,6 +768,63 @@ main{height:100%;overflow:hidden}
   .micro{display:none}
 }
 
+/* ---------- 20b. REGISTRO ---------- */
+.registro{position:relative;padding:110px 0 130px;background:
+  radial-gradient(900px 520px at 78% 8%, rgba(243,197,67,.09), transparent 62%),
+  linear-gradient(180deg, var(--night) 0%, var(--night-2) 46%, var(--night-3) 100%);
+  border-top:1px solid var(--ink-line)}
+.registro-grid{display:grid;gap:52px;grid-template-columns:1fr}
+@media (min-width:940px){.registro-grid{grid-template-columns:.9fr 1.1fr;align-items:center;gap:64px}}
+.registro-lead{color:var(--muted);max-width:46ch}
+.registro-list{margin-top:26px;display:grid;gap:12px}
+.registro-list li{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:var(--muted)}
+.registro-list b{color:var(--bone);font-weight:800}
+.registro-list i{color:var(--gold);font-style:normal;font-weight:900}
+
+.reg-card{
+  background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.015));
+  border:1px solid var(--ink-line);border-radius:var(--r-lg);
+  padding:34px 30px;
+  box-shadow:0 30px 90px rgba(0,0,0,.5);
+  backdrop-filter:blur(6px);
+}
+.reg-form{display:grid;gap:16px}
+.reg-row{display:grid;gap:16px;grid-template-columns:1fr}
+@media (min-width:620px){.reg-row{grid-template-columns:1fr 1fr}}
+.reg-field{display:grid;gap:7px}
+.reg-field label{font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-2)}
+.reg-field input{
+  width:100%;padding:14px 15px;
+  background:rgba(5,7,12,.72);
+  color:var(--bone);
+  border:1px solid var(--ink-line);border-radius:var(--r-md);
+  font-family:inherit;font-size:16px;
+  transition:border-color .3s var(--ease),box-shadow .3s var(--ease),background .3s
+}
+.reg-field input::placeholder{color:var(--muted-2)}
+.reg-field input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-glow);background:rgba(5,7,12,.9)}
+.reg-field input[aria-invalid="true"]{border-color:#E2564A}
+.reg-hint{font-size:12px;color:var(--muted-2)}
+.reg-check{display:flex;gap:11px;align-items:flex-start;font-size:13.5px;color:var(--muted);line-height:1.5}
+.reg-check input{margin-top:3px;accent-color:var(--gold);width:18px;height:18px;flex:0 0 auto}
+.reg-submit{
+  margin-top:6px;display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  width:100%;padding:17px 24px;border:0;border-radius:999px;cursor:pointer;
+  background:linear-gradient(100deg,var(--gold-deep),var(--gold) 42%,var(--gold-hi) 68%,var(--gold) 100%);
+  color:#170F00;font-family:inherit;font-size:14px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;
+  transition:transform .3s var(--ease),filter .3s,opacity .3s
+}
+.reg-submit:hover:not(:disabled){transform:translateY(-3px);filter:brightness(1.06)}
+.reg-submit:disabled{opacity:.6;cursor:progress}
+.reg-msg{
+  display:none;margin-top:4px;padding:14px 16px;border-radius:var(--r-md);
+  font-size:14.5px;line-height:1.5;border:1px solid transparent
+}
+.reg-msg.show{display:block}
+.reg-msg.ok{background:rgba(37,211,102,.1);border-color:rgba(37,211,102,.4);color:#B9F3D0}
+.reg-msg.err{background:rgba(226,86,74,.1);border-color:rgba(226,86,74,.42);color:#FFC9C3}
+.reg-legal{margin-top:18px;font-size:11.5px;letter-spacing:.02em;color:var(--muted-2)}
+
 /* ---------- 21. IMPRESIÓN ---------- */
 @media print{
   .splash,.cursor,.sticky-cta,.hero-bg,.ticker{display:none !important}
@@ -831,6 +888,7 @@ main{height:100%;overflow:hidden}
           <span class="cta-txt"><b>VAMOS A JUGAR</b></span>
           <span class="cta-arrow" aria-hidden="true">→</span>
         </a>
+        <a class="btn-ghost" href="#registro">Crear mi cuenta</a>
       </div>
 
       <p class="micro reveal">Solo para mayores de 18 años · Juega con responsabilidad</p>
@@ -882,6 +940,68 @@ main{height:100%;overflow:hidden}
     <div class="ticker-track">
       <span>JUEGA AL 100%</span><i>&#10022;</i><span>PRIMERA CARGA</span><i>&#10022;</i><span>CAPIWARA.COM</span><i>&#10022;</i><span>ENTRETENIMIENTO +18</span><i>&#10022;</i>
     </div>
+  </div>
+</section>
+
+<!-- ================= REGISTRO ================= -->
+<section class="registro" id="registro">
+  <div class="shell registro-grid">
+
+    <div class="registro-copy">
+      <p class="kicker reveal">Crea tu cuenta</p>
+      <h2 class="h2 reveal">Registrate <span class="serif">en un paso</span></h2>
+      <p class="registro-lead reveal">Completa tus datos y tu cuenta queda creada al instante. Te enviamos tu usuario por correo para que entres directo a jugar.</p>
+      <ul class="registro-list reveal">
+        <li><i>&#10022;</i><span><b>Tu usuario es tu correo.</b> Sin apodos raros ni codigos que olvidar.</span></li>
+        <li><i>&#10022;</i><span><b>Cuenta activa al instante.</b> No hay que esperar aprobacion manual.</span></li>
+        <li><i>&#10022;</i><span><b>Confirmacion por correo.</b> Te llega el usuario con el que ingresas.</span></li>
+      </ul>
+    </div>
+
+    <div class="reg-card reveal">
+      <form class="reg-form" id="regForm" novalidate>
+        <div class="reg-row">
+          <div class="reg-field">
+            <label for="regNombre">Nombre</label>
+            <input id="regNombre" name="nombre" type="text" autocomplete="given-name" placeholder="Jonathan" required>
+          </div>
+          <div class="reg-field">
+            <label for="regApellido">Apellido</label>
+            <input id="regApellido" name="apellido" type="text" autocomplete="family-name" placeholder="Jaldin" required>
+          </div>
+        </div>
+
+        <div class="reg-field">
+          <label for="regCarnet">Carnet de identidad</label>
+          <input id="regCarnet" name="carnet" type="text" inputmode="numeric" placeholder="9876543" required>
+        </div>
+
+        <div class="reg-field">
+          <label for="regCorreo">Correo electronico</label>
+          <input id="regCorreo" name="correo" type="email" autocomplete="email" placeholder="tucorreo@ejemplo.com" required>
+          <span class="reg-hint">Este correo sera tambien tu usuario para ingresar.</span>
+        </div>
+
+        <div class="reg-field">
+          <label for="regPassword">Contrasena</label>
+          <input id="regPassword" name="password" type="password" autocomplete="new-password" placeholder="Minimo 8 caracteres" minlength="8" required>
+        </div>
+
+        <label class="reg-check" for="regMayor">
+          <input id="regMayor" name="mayor" type="checkbox" required>
+          <span>Confirmo que tengo 18 anos o mas y acepto los terminos y la politica de privacidad.</span>
+        </label>
+
+        <button class="reg-submit" id="regSubmit" type="submit">
+          <span id="regSubmitTxt">Crear mi cuenta</span>
+        </button>
+
+        <p class="reg-msg" id="regMsg" role="status" aria-live="polite"></p>
+      </form>
+
+      <p class="reg-legal">Solo para mayores de 18 anos &middot; Juega con responsabilidad</p>
+    </div>
+
   </div>
 </section>
 
@@ -1354,6 +1474,117 @@ main{height:100%;overflow:hidden}
 
 })();
 
+</script>
+<script>
+/* ============================================================
+   REGISTRO → n8n
+   Pega abajo la Production URL del nodo Webhook de n8n.
+   Se envia como form-urlencoded a proposito: evita el preflight
+   CORS del navegador.
+   ============================================================ */
+(function () {
+  'use strict';
+
+  var N8N_WEBHOOK_URL = 'https://n8n.srv1962555.hstgr.cloud/webhook/registro-capi';
+  var URL_JUEGO = 'https://capiwara.com/';
+
+  var form = document.getElementById('regForm');
+  if (!form) return;
+
+  var btn = document.getElementById('regSubmit');
+  var btnTxt = document.getElementById('regSubmitTxt');
+  var msg = document.getElementById('regMsg');
+
+  function mostrar(tipo, texto) {
+    msg.className = 'reg-msg show ' + tipo;
+    msg.textContent = texto;
+  }
+
+  function marcar(campo, invalido) {
+    campo.setAttribute('aria-invalid', invalido ? 'true' : 'false');
+  }
+
+  function validar(datos) {
+    var errores = [];
+    if (!datos.nombre) errores.push('nombre');
+    if (!datos.apellido) errores.push('apellido');
+    if (!datos.carnet) errores.push('carnet');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(datos.correo)) errores.push('correo');
+    if (datos.password.length < 8) errores.push('password');
+    return errores;
+  }
+
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+
+    var campos = {
+      nombre: document.getElementById('regNombre'),
+      apellido: document.getElementById('regApellido'),
+      carnet: document.getElementById('regCarnet'),
+      correo: document.getElementById('regCorreo'),
+      password: document.getElementById('regPassword')
+    };
+
+    var datos = {
+      nombre: campos.nombre.value.trim(),
+      apellido: campos.apellido.value.trim(),
+      carnet: campos.carnet.value.trim(),
+      correo: campos.correo.value.trim().toLowerCase(),
+      password: campos.password.value
+    };
+
+    var errores = validar(datos);
+    Object.keys(campos).forEach(function (k) { marcar(campos[k], errores.indexOf(k) !== -1); });
+
+    if (errores.length) {
+      mostrar('err', 'Revisa los campos marcados: el correo debe ser valido y la contrasena necesita al menos 8 caracteres.');
+      return;
+    }
+    if (!document.getElementById('regMayor').checked) {
+      mostrar('err', 'Debes confirmar que tienes 18 anos o mas para crear tu cuenta.');
+      return;
+    }
+
+    btn.disabled = true;
+    btnTxt.textContent = 'Creando tu cuenta...';
+    mostrar('ok', 'Enviando tus datos...');
+
+    var cuerpo = new URLSearchParams();
+    Object.keys(datos).forEach(function (k) { cuerpo.append(k, datos[k]); });
+
+    fetch(N8N_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+      body: cuerpo.toString()
+    })
+      .then(function (res) {
+        return res.json().catch(function () { return { ok: res.ok }; });
+      })
+      .then(function (data) {
+        if (data && data.ok) {
+          form.reset();
+          mostrar('ok', 'Listo. Tu cuenta fue creada con el usuario ' + (data.usuario || datos.correo) + '. Te enviamos la confirmacion por correo.');
+          btnTxt.textContent = 'Ir a jugar';
+          btn.disabled = false;
+          btn.type = 'button';
+          btn.addEventListener('click', function () { window.open(URL_JUEGO, '_blank', 'noopener'); });
+          return;
+        }
+        if (data && data.codigo === 'cuenta_existente') {
+          mostrar('err', 'Ya existe una cuenta con ese correo. Ingresa con tu usuario o recupera tu contrasena.');
+        } else {
+          mostrar('err', (data && data.mensaje) || 'No pudimos crear tu cuenta. Intenta de nuevo en unos minutos.');
+        }
+        btn.disabled = false;
+        btnTxt.textContent = 'Crear mi cuenta';
+      })
+      .catch(function () {
+        mostrar('err', 'Hubo un problema de conexion. Revisa tu internet e intenta otra vez.');
+        btn.disabled = false;
+        btnTxt.textContent = 'Crear mi cuenta';
+      });
+  });
+})();
 </script>
 </body>
 </html>
